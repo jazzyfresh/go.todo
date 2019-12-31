@@ -1,10 +1,17 @@
-go.todo
--------
+# go.todo
 
 > Everybody deserves tools to live a meaningful, productive life
 
+This is a proof-of-concept productivity project, which is a bunch of jargon for --
+it will help you organize your thoughts into dependencies and next actions,
+enabling you to live a productive life, whatever that means to you.
+
+Right now, it's a dinky web server built in Go.
+Long term, it will be a fully functional (double meaning, ask me later)
+application for all clients.
+
 ## Setup
-1. Install the Go programming language
+#### 1. Install the Go programming language
 - [ ] Check if Go is already installed
 ```
 #! which go
@@ -20,26 +27,31 @@ go version go1.12.4 linux/amd64
 #! export PATH=$PATH:~/go/bin
 ```
 
-2. Download the project codebase
+#### 2. Download the project codebase
 - [ ] Change your working directory to the place where Go will be looking for code
 (confusing, too much to explain why it is like this, Google had a monorepo,
 resulting in problematic packaging patterns,
 but anyways this is defined in Step 1 of setup.)
+```
+#! cd $YOUR_GO_HOME
+```
 - [ ] (One time only) Create a directory for your github account
+```
+#! mkdir $YOUR_GITHUB_USERNAME
+```
 - [ ] Download your fork of the project. This creates a directory for your forked project,
 and copies it from the origin repository (GitHub).
 ```
-#! cd $YOUR_GO_HOME
-#! mkdir $YOUR_GITHUB_USERNAME
 #! git clone https://github.com/$YOUR_GITHUB_USERNAME/go.todo.git
 ```
 - [ ] Change directories in to the project directory and look around
 ```
 #! cd go.todo
-#! ls -lG
+#! ls
+main.go  README.md  Task.go
 ```
 
-3. Build & Run the web server
+#### 3. Build & Run the web server
 ```
 #! go install
 #! go.todo
@@ -48,7 +60,7 @@ Go to http://localhost:8080 to get to it
 ```
 
 
-4. Test the web server
+#### 4. Test the web server
 - [ ] Verify the web server is running & working correctly
 by going to the link http://localhost:8080 in your browser
 - [ ] Verify the web server is running & working correctly
