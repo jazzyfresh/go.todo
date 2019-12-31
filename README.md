@@ -1,9 +1,10 @@
 # go.todo
 
 > Everybody deserves tools to live a meaningful, productive life
+>                                                - Me
 
 This is a proof-of-concept productivity project, which is a bunch of jargon for --
-it will help you organize your thoughts into dependencies and next actions,
+this is an app that aims to help you organize your thoughts into dependencies and next actions,
 enabling you to live a productive life, whatever that means to you.
 
 Right now, it's a dinky web server built in Go.
@@ -17,12 +18,16 @@ application for all clients.
 #! which go
 /usr/local/go/bin/go
 ```
+- [ ] Download the Go language binary & setup Go directories
+```
+TODO
+```
 - [ ] Verify your installation
 ```
 #! go version
 go version go1.12.4 linux/amd64
 ```
-- [ ] Add Go binaries to your path
+- [ ] Add Go binaries to your path (so you can run executables later)
 ```
 #! export PATH=$PATH:~/go/bin
 ```
