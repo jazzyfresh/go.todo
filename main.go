@@ -26,8 +26,22 @@ func TaskPage(writer http.ResponseWriter, request *http.Request) {
 	var task Task
 	decoder.Decode(&task)
 	fmt.Println(task)
+
+	// If task struct is not empty
+	// https://stackoverflow.com/a/28447372/1766434
 	if (Task{}) != task {
-		tasks = append(tasks, task)
+		// If task is already in list, Update it
+		updated := false
+		for i, t := range tasks {
+			if t.Name == task.Name {
+				tasks[i] = task
+				updated = true
+			}
+		}
+		// Otherwise, Add it
+		if !updated {
+			tasks = append(tasks, task)
+		}
 	}
 	tasksHtml := makeTasksHtml()
 	fmt.Fprintf(writer, tasksHtml)
@@ -36,9 +50,16 @@ func TaskPage(writer http.ResponseWriter, request *http.Request) {
 func makeTasksHtml() string {
 	html := ""
 	for _, t := range tasks {
-		html = html + fmt.Sprintf("* %s\n", t.Name)
+
+		// Because Go language doesn't have ternary operators
+		// https://golang.org/doc/faq#Does_Go_have_a_ternary_form
+		completedMarker := " "
+		if t.Completed {
+			completedMarker = "x"
+		}
+
+		html = html + fmt.Sprintf("- [%s] ", completedMarker)
+		html = html + fmt.Sprintf("%s\n", t.Name)
 	}
 	return html
 }
-
-// accept task crud requests

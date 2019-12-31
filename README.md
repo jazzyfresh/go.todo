@@ -74,31 +74,47 @@ by curling the link in the terminal
 #! curl "localhost:8080"
 BOOYAH
 ```
-- [ ] Verify the task creation functionality with curl
+- [ ] Verify the task functionality with curl
 ```
-#!  curl -X POST "localhost:8080/task" -H "Content-Type: application/json" -d '{"name":"post a task"}'             
-* post a task
-#!  curl -X POST "localhost:8080/task" -H "Content-Type: application/json" -d '{"name":"add completed functionality"}'                                                                                                                                
-* post a task                                                                                                                      
-* add completed functionality
+#!  curl -X POST "localhost:8080/task" -H "Content-Type: application/json" -d '{"name":"post a task","completed":tr
+ue}'                                                                                                                               
+- [x] post a task
+#!  curl -X POST "localhost:8080/task" -H "Content-Type: application/json" -d '{"name":"add completed functionality
+"}'                                                                                                                                
+- [x] post a task                                                                                                                  
+- [ ] add completed functionality                                                                                                  
+#!  curl -X POST "localhost:8080/task" -H "Content-Type: application/json" -d '{"name":"add completed functi[1/104]
+","completed":true}'
+- [x] post a task
+- [x] add completed functionality
 #!  curl -X POST "localhost:8080/task" -H "Content-Type: application/json" -d '{"name":"add lists functionality"}'
-* post a task
-* add completed functionality
-* add lists functionality
-#!  curl -X POST "localhost:8080/task"       # Empty task bodies do not add a task
-* post a task
-* add completed functionality
-* add lists functionality
+- [x] post a task
+- [x] add completed functionality
+- [ ] add lists functionality
+#!  curl -X POST "localhost:8080/task" -H "Content-Type: application/json" -d '{"name":"backup to file"}'
+- [x] post a task
+- [x] add completed functionality
+- [ ] add lists functionality
+- [ ] backup to file
 ```
 - [ ] Meanwhile, the running server process should print out these logs and look like this so far
 ```
 #!  go.todo
 Starting go.todo server
 Go to http://localhost:8080 to get to it
-{post a task}
-{add completed functionality}
-{add lists functionality}
-{}
+{post a task true}
+{add completed functionality false}
+{add completed functionality true}
+{add lists functionality false}
+{backup to file false}
 ```
 
+## TODO
+- [x] init project
+- [x] init readme
+- [x] post a task
+- [x] add completed functionality
+- [ ] add lists functionality
+  - [ ] `parent<>child` task relationship
+- [ ] backup to file
 

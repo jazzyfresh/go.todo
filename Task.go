@@ -3,7 +3,8 @@ package main
 import "time"
 
 type Task struct {
-	Name string
+	Name      string
+	Completed bool
 	//description string
 	//parent      Task
 	//children    []Task
