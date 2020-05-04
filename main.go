@@ -44,6 +44,7 @@ func main() {
 }
 
 func TaskPage(writer http.ResponseWriter, request *http.Request) {
+	message := fmt.Sprintf("Error updating task")
 	decoder := json.NewDecoder(request.Body)
 	var task Task
 	decoder.Decode(&task)
@@ -57,19 +58,19 @@ func TaskPage(writer http.ResponseWriter, request *http.Request) {
 
 		encoded, err := json.Marshal(task)
 		if err != nil {
-			log.Printf("Error marshalling task: %s\n", err)
+			message = fmt.Sprintf("Error marshalling task: %#+v\n", err)
 		}
 
 		db.Update(func(tx *bolt.Tx) error {
 			b := tx.Bucket([]byte(TASKS_BUCKET))
 			err := b.Put([]byte(task.Uuid), []byte(encoded))
-			fmt.Printf("Updated task: %s\n", task)
+			message = fmt.Sprintf("Updated task: %#+v\n", task)
 			return err
 		})
 
 	}
-	tasksHtml := fmt.Sprintf("Created task: %s", task)
-	fmt.Fprintf(writer, tasksHtml)
+	log.Printf(message)
+	fmt.Fprintf(writer, message)
 }
 
 func RootPage(writer http.ResponseWriter, request *http.Request) {

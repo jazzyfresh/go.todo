@@ -76,11 +76,9 @@ BOOYAH
 ```
 - [ ] Verify the task functionality with curl
 ```
-#!  curl -X POST "localhost:8080/task" -H "Content-Type: application/json" -d '{"name":"post a task","completed":tr
-ue}'                                                                                                                               
+#!  curl -X POST "localhost:8080/task" -H "Content-Type: application/json" -d '{"name":"post a task","completed":true}'                                                                                                                               
 - [x] post a task
-#!  curl -X POST "localhost:8080/task" -H "Content-Type: application/json" -d '{"name":"add completed functionality
-"}'                                                                                                                                
+#!  curl -X POST "localhost:8080/task" -H "Content-Type: application/json" -d '{"name":"add completed functionality"}'                                                                                                                                
 - [x] post a task                                                                                                                  
 - [ ] add completed functionality                                                                                                  
 #!  curl -X POST "localhost:8080/task" -H "Content-Type: application/json" -d '{"name":"add completed functi[1/104]
@@ -117,4 +115,8 @@ Go to http://localhost:8080 to get to it
 - [ ] add lists functionality
   - [ ] `parent<>child` task relationship
 - [ ] backup to file
+  - [x] persist to boltdb
+  - [x] use uuid
+  - [ ] boltdb dump
+  - [ ] display in order of creation
 
