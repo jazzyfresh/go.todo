@@ -49,8 +49,7 @@ func TaskPage(writer http.ResponseWriter, request *http.Request) {
 	var task Task
 	decoder.Decode(&task)
 
-	// If task struct is not empty
-	// https://stackoverflow.com/a/28447372/1766434
+	// If task struct is not empty https://stackoverflow.com/a/28447372/1766434
 	if (Task{}) != task {
 		if task.Uuid == "" {
 			task.Uuid = uuid.New().String()
@@ -76,14 +75,24 @@ func TaskPage(writer http.ResponseWriter, request *http.Request) {
 func RootPage(writer http.ResponseWriter, request *http.Request) {
 	log.Println("Formatting tasks...")
 	html := ""
+
+	// Begin boltdb transaction
 	db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(TASKS_BUCKET))
 		c := b.Cursor()
 
+		// Iterate over key/value pairs in boltdb
 		for k, v := c.First(); k != nil; k, v = c.Next() {
+			// Key is uuid
+			// Log to server console
+			// TODO: don't need to log every uuid for every read transaction
 			fmt.Printf("Uuid %s\n", k)
+
+			// Value is task data
 			var t Task
+			// Have to unmarshal the data into a json object
 			err := json.Unmarshal(v, &t)
+			// Hopefully that doesnt bork
 			if err != nil {
 				log.Println(err)
 				return err
@@ -96,6 +105,8 @@ func RootPage(writer http.ResponseWriter, request *http.Request) {
 				completedMarker = "x"
 			}
 
+			// Display task name & completed status, eg
+			// - [x] task is complete
 			html = html + fmt.Sprintf("- [%s] ", completedMarker)
 			html = html + fmt.Sprintf("%s\n", t.Name)
 		}
